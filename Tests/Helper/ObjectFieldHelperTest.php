@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Tests\Helper;
+namespace Sonatra\Component\DoctrineConsole\Tests\Helper;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sonatra\Bundle\DoctrineConsoleBundle\Helper\ObjectFieldHelper;
-use Sonatra\Bundle\DoctrineConsoleBundle\Tests\Helper\Fixtures\InstanceMock;
+use Sonatra\Component\DoctrineConsole\Helper\ObjectFieldHelper;
+use Sonatra\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;

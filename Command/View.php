@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Command;
+namespace Sonatra\Component\DoctrineConsole\Command;
 
-use Sonatra\Bundle\DoctrineConsoleBundle\Helper\DetailObjectHelper;
+use Sonatra\Component\DoctrineConsole\Helper\DetailObjectHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

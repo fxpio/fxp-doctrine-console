@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Tests\Helper\Fixtures;
+namespace Sonatra\Component\DoctrineConsole\Tests\Helper\Fixtures;
 
 /**
  * Mock instance.

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Adapter;
+namespace Sonatra\Component\DoctrineConsole\Adapter;
 
 /**
  * Command Adapter for service manager.

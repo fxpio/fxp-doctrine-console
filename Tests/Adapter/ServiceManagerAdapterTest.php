@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Tests\Adapter;
+namespace Sonatra\Component\DoctrineConsole\Tests\Adapter;
 
-use Sonatra\Bundle\DoctrineConsoleBundle\Adapter\ServiceManagerAdapter;
-use Sonatra\Bundle\DoctrineConsoleBundle\Tests\Adapter\Fixtures\MockManager;
+use Sonatra\Component\DoctrineConsole\Adapter\ServiceManagerAdapter;
+use Sonatra\Component\DoctrineConsole\Tests\Adapter\Fixtures\MockManager;
 
 /**
  * Service Manager Adapter Tests.

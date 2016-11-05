@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Command;
+namespace Sonatra\Component\DoctrineConsole\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 

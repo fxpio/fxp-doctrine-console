@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Command;
+namespace Sonatra\Component\DoctrineConsole\Command;
 
-use Sonatra\Bundle\DoctrineConsoleBundle\Adapter\AdapterInterface;
-use Sonatra\Bundle\DoctrineConsoleBundle\Helper\ObjectFieldHelper;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Sonatra\Component\DoctrineConsole\Adapter\AdapterInterface;
+use Sonatra\Component\DoctrineConsole\Helper\ObjectFieldHelper;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-abstract class Base extends ContainerAwareCommand
+abstract class Base extends Command
 {
     /**
      * @var ObjectFieldHelper

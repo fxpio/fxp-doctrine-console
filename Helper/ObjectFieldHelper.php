@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Helper;
+namespace Sonatra\Component\DoctrineConsole\Helper;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use Sonatra\Bundle\DoctrineConsoleBundle\Util\ObjectFieldUtil;
+use Sonatra\Component\DoctrineConsole\Util\ObjectFieldUtil;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Validator\ConstraintViolationInterface;

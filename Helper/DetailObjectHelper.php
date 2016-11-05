@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Helper;
+namespace Sonatra\Component\DoctrineConsole\Helper;
 
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Output\OutputInterface;

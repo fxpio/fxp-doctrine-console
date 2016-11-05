@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Tests\Adapter\Fixtures;
+namespace Sonatra\Component\DoctrineConsole\Tests\Adapter\Fixtures;
 
 /**
  * Mock Manager.

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Bundle\DoctrineConsoleBundle\Tests\Helper;
+namespace Sonatra\Component\DoctrineConsole\Tests\Helper;
 
-use Sonatra\Bundle\DoctrineConsoleBundle\Helper\DetailObjectHelper;
-use Sonatra\Bundle\DoctrineConsoleBundle\Tests\Helper\Fixtures\InstanceMock;
+use Sonatra\Component\DoctrineConsole\Helper\DetailObjectHelper;
+use Sonatra\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**
