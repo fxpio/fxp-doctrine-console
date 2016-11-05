@@ -84,7 +84,7 @@ abstract class ObjectFieldUtil
     /**
      * Set the field value.
      *
-     * @param mixed      $instance  The object instance
+     * @param object     $instance  The object instance
      * @param string     $fieldName The field name
      * @param mixed|null $value     The field value
      */

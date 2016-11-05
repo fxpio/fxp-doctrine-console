@@ -71,7 +71,7 @@ abstract class DetailObjectHelper
     /**
      * Get the formatted value of field.
      *
-     * @param mixed  $instance   The object instance
+     * @param object $instance   The object instance
      * @param string $methodName The method name of field
      *
      * @return string
