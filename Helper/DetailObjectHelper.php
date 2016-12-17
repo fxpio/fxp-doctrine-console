@@ -90,7 +90,7 @@ abstract class DetailObjectHelper
     /**
      * Format the value of field.
      *
-     * @param mixed $value The value of field.
+     * @param mixed $value the value of field
      *
      * @return string
      */
