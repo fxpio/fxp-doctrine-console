@@ -41,7 +41,7 @@ interface AdapterInterface
     /**
      * Get the object instance.
      *
-     * @param string $identifier The unique identifier
+     * @param int|string $identifier The unique identifier
      *
      * @return object The object instance
      *
