@@ -12,9 +12,11 @@
 namespace Sonatra\Component\DoctrineConsole\Command;
 
 use Sonatra\Component\DoctrineConsole\Adapter\AdapterInterface;
+use Sonatra\Component\DoctrineConsole\Exception\RecordNotFoundException;
 use Sonatra\Component\DoctrineConsole\Helper\ObjectFieldHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author François Pluchino <francois.pluchino@sonatra.com>
@@ -35,6 +37,11 @@ abstract class Base extends Command
      * @var string
      */
     protected $action = 'INVALID_ACTION';
+
+    /**
+     * @var bool
+     */
+    protected $injectFieldOptions = false;
 
     /**
      * @var array
@@ -86,5 +93,40 @@ abstract class Base extends Command
         if ('create' !== $this->action && !$this->getDefinition()->hasArgument($adp->getIdentifierArgument())) {
             $this->addArgument($adp->getIdentifierArgument(), InputArgument::REQUIRED, sprintf($adp->getIdentifierArgumentDescription(), $adp->getShortName()));
         }
+
+        if ($this->injectFieldOptions) {
+            $this->helper->injectFieldOptions($this->getDefinition(), $this->adapter->getClass());
+        }
+    }
+
+    /**
+     * Validate the instance.
+     *
+     * @param object|null $instance The instance
+     *
+     * @throws RecordNotFoundException
+     */
+    protected function validateInstance($instance)
+    {
+        if (!is_object($instance)) {
+            throw new RecordNotFoundException();
+        }
+    }
+
+    /**
+     * Show the message in the console output.
+     *
+     * @param OutputInterface $output   The console output
+     * @param object          $instance The object instance
+     * @param string          $message  The displayed message
+     */
+    protected function showMessage(OutputInterface $output, $instance, $message)
+    {
+        $methodGet = $this->adapter->getDisplayNameMethod();
+
+        $output->writeln(array(
+            '',
+            sprintf($message, strtolower($this->adapter->getShortName()), $instance->$methodGet()),
+        ));
     }
 }

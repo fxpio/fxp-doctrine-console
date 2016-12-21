@@ -29,14 +29,9 @@ class Undelete extends Base
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $methodGet = $this->adapter->getDisplayNameMethod();
         $id = $input->getArgument($this->adapter->getIdentifierArgument());
-
         $instance = $this->adapter->undelete($id);
 
-        $output->writeln(array(
-            '',
-            sprintf('Undeleted the %s: <info>%s</info>', $this->adapter->getShortName(), $instance->$methodGet()),
-        ));
+        $this->showMessage($output, $instance, 'The %s <info>%s</info> was undeleted with successfully');
     }
 }

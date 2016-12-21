@@ -13,6 +13,9 @@ namespace Sonatra\Component\DoctrineConsole\Tests\Adapter;
 
 use Sonatra\Component\DoctrineConsole\Adapter\ServiceManagerAdapter;
 use Sonatra\Component\DoctrineConsole\Tests\Adapter\Fixtures\MockManager;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Service Manager Adapter Tests.
@@ -27,6 +30,11 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
     protected $manager;
 
     /**
+     * @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $validator;
+
+    /**
      * @var ServiceManagerAdapter
      */
     protected $adapter;
@@ -34,13 +42,15 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->manager = new MockManager();
-        $this->adapter = new ServiceManagerAdapter($this->manager);
+        $this->validator = $this->getMockBuilder(ValidatorInterface::class)->getMock();
+        $this->adapter = new ServiceManagerAdapter($this->manager, $this->validator);
         $this->adapter->setClass('FooBar');
     }
 
     protected function tearDown()
     {
         $this->manager = null;
+        $this->validator = null;
         $this->adapter = null;
     }
 
@@ -50,7 +60,7 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidCreateMethod()
     {
-        $this->adapter->create();
+        $this->adapter->create(new \stdClass());
     }
 
     /**
@@ -114,6 +124,7 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setDisplayNameMethod('getId');
         $this->assertSame('getId', $this->adapter->getDisplayNameMethod());
 
+        $this->adapter->setNewInstanceMethod('newInstanceInstance');
         $this->adapter->setCreateMethod('createInstance');
         $this->adapter->setGetMethod('getInstance');
         $this->adapter->setUpdateMethod('updateInstance');
@@ -121,10 +132,27 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter->setUndeleteMethod('undeleteInstance');
     }
 
+    public function testNewInstance()
+    {
+        $this->adapter->setNewInstanceMethod('newInstanceMock');
+        $this->assertEquals(new \stdClass(), $this->adapter->newInstance(array()));
+    }
+
     public function testCreate()
     {
         $this->adapter->setCreateMethod('createMock');
-        $this->assertEquals(new \stdClass(), $this->adapter->create());
+        $this->adapter->create(new \stdClass());
+    }
+
+    /**
+     * @expectedException \Sonatra\Component\DoctrineConsole\Exception\ValidationException
+     */
+    public function testCreateWithError()
+    {
+        $object = new \stdClass();
+        $this->addTestViolation($object);
+        $this->adapter->setCreateMethod('createMock');
+        $this->adapter->create($object);
     }
 
     public function testGet()
@@ -154,6 +182,17 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
         $this->adapter->update(new \stdClass());
     }
 
+    /**
+     * @expectedException \Sonatra\Component\DoctrineConsole\Exception\ValidationException
+     */
+    public function testUpdateWithError()
+    {
+        $object = new \stdClass();
+        $this->addTestViolation($object);
+        $this->adapter->setUpdateMethod('updateMock');
+        $this->adapter->update($object);
+    }
+
     public function testDelete()
     {
         $this->adapter->setDeleteMethod('deleteMock');
@@ -170,5 +209,22 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
         $valid = new \stdClass();
         $valid->id = '42';
         $this->assertEquals($valid, $this->adapter->undelete('42'));
+    }
+
+    /**
+     * Unvalidate the object.
+     *
+     * @param object $object The object instance
+     */
+    private function addTestViolation($object)
+    {
+        $violations = new ConstraintViolationList(array(
+            new ConstraintViolation('Message 1', 'Message 1', array(), $object, null, null),
+        ));
+
+        $this->validator->expects($this->once())
+            ->method('validate')
+            ->with($object)
+            ->willReturn($violations);
     }
 }

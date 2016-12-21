@@ -21,9 +21,16 @@ class MockManager
     /**
      * @return \stdClass
      */
-    public function createMock()
+    public function newInstanceMock()
     {
         return new \stdClass();
+    }
+
+    /**
+     * @param \stdClass $instance
+     */
+    public function createMock($instance)
+    {
     }
 
     /**
@@ -38,7 +45,7 @@ class MockManager
         $ins = null;
 
         if ('invalid' !== $fields[$key]) {
-            $ins = $this->createMock();
+            $ins = $this->newInstanceMock();
             $ins->id = $fields[$key];
         }
 

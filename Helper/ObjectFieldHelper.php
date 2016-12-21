@@ -16,9 +16,6 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Sonatra\Component\DoctrineConsole\Util\ObjectFieldUtil;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Validator\ConstraintViolationInterface;
-use Symfony\Component\Validator\Exception\ValidatorException;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Helper for manipulate and validate the doctrine objects in console.
@@ -33,11 +30,6 @@ class ObjectFieldHelper
     protected $om;
 
     /**
-     * @var ValidatorInterface|null
-     */
-    protected $validator;
-
-    /**
      * @var array
      */
     protected $configs;
@@ -45,13 +37,11 @@ class ObjectFieldHelper
     /**
      * Constructor.
      *
-     * @param ObjectManager      $objectManager The object manager
-     * @param ValidatorInterface $validator     The validator
+     * @param ObjectManager $objectManager The object manager
      */
-    public function __construct(ObjectManager $objectManager, ValidatorInterface $validator = null)
+    public function __construct(ObjectManager $objectManager)
     {
         $this->om = $objectManager;
-        $this->validator = $validator;
         $this->configs = array();
     }
 
@@ -117,31 +107,6 @@ class ObjectFieldHelper
                 ObjectFieldUtil::setFieldValue($instance, $fieldName, $value);
             } elseif ((array_key_exists($fieldName, $associations))) {
                 $this->setAssociationValue($instance, $fieldName, $value, $associations[$fieldName], $targetId);
-            }
-        }
-    }
-
-    /**
-     * Validate the object instance.
-     *
-     * @param object $instance The object instance
-     *
-     * @throws ValidatorException When an error exist
-     */
-    public function validateObject($instance)
-    {
-        if (null !== $this->validator) {
-            /* @var ConstraintViolationInterface[] $errorList */
-            $errorList = $this->validator->validate($instance);
-
-            if (count($errorList) > 0) {
-                $msg = sprintf('Field validation errors for "%s":', get_class($instance));
-
-                foreach ($errorList as $error) {
-                    $msg .= sprintf('%s  - %s: %s', PHP_EOL, $error->getPropertyPath(), $error->getMessage());
-                }
-
-                throw new ValidatorException($msg);
             }
         }
     }

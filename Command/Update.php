@@ -17,12 +17,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class Delete extends Base
+class Update extends Base
 {
     /**
      * {@inheritdoc}
      */
-    protected $action = 'delete';
+    protected $action = 'update';
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $injectFieldOptions = true;
 
     /**
      * {@inheritdoc}
@@ -33,8 +38,9 @@ class Delete extends Base
         $instance = $this->adapter->get($id);
 
         $this->validateInstance($instance);
-        $this->adapter->delete($instance);
+        $this->helper->injectNewValues($input, $instance);
+        $this->adapter->update($instance);
 
-        $this->showMessage($output, $instance, 'The %s <info>%s</info> was deleted with successfully');
+        $this->showMessage($output, $instance, 'The %s <info>%s</info> was updated with successfully');
     }
 }

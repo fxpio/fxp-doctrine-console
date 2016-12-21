@@ -20,7 +20,6 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Object Field Helper Tests.
@@ -274,45 +273,5 @@ class ObjectFieldHelperTest extends \PHPUnit_Framework_TestCase
         $this->ofh->injectNewValues($input, $instance);
 
         $this->assertEquals($valid, $instance);
-    }
-
-    public function testValidateObjectWithoutValidator()
-    {
-        $this->ofh->validateObject(new \stdClass());
-    }
-
-    public function testValidateObject()
-    {
-        /* @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
-        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator\ValidatorInterface')->getMock();
-        $validator->expects($this->any())
-            ->method('validate')
-            ->will($this->returnValue(array()));
-
-        $this->ofh = new ObjectFieldHelper($this->om, $validator);
-        $this->ofh->validateObject(new \stdClass());
-    }
-
-    /**
-     * @expectedException \Symfony\Component\Validator\Exception\ValidatorException
-     */
-    public function testValidateObjectWithException()
-    {
-        /* @var ValidatorInterface|\PHPUnit_Framework_MockObject_MockObject $validator */
-        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator\ValidatorInterface')->getMock();
-        $constraint = $this->getMockBuilder('Symfony\Component\Validator\ConstraintViolationInterface')->getMock();
-        $constraint->expects($this->any())
-            ->method('getPropertyPath')
-            ->will($this->returnValue('property_path'));
-        $constraint->expects($this->any())
-            ->method('getMessage')
-            ->will($this->returnValue('field error message'));
-
-        $validator->expects($this->any())
-            ->method('validate')
-            ->will($this->returnValue(array($constraint)));
-
-        $this->ofh = new ObjectFieldHelper($this->om, $validator);
-        $this->ofh->validateObject(new \stdClass());
     }
 }

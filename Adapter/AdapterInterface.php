@@ -19,13 +19,24 @@ namespace Sonatra\Component\DoctrineConsole\Adapter;
 interface AdapterInterface
 {
     /**
-     * Create the object instance.
+     * Create the object instance without saving it.
+     *
+     * @param array $options The default values
      *
      * @return object The object instance
      *
      * @throws \RuntimeException When the create method is not accessible
      */
-    public function create();
+    public function newInstance(array $options = array());
+
+    /**
+     * Create the object instance.
+     *
+     * @param object $instance The object instance
+     *
+     * @throws \RuntimeException When the create method is not accessible
+     */
+    public function create($instance);
 
     /**
      * Get the object instance.

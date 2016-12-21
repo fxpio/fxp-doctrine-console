@@ -12,11 +12,12 @@
 namespace Sonatra\Component\DoctrineConsole\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class Create extends BaseHelper
+class Create extends Base
 {
     /**
      * {@inheritdoc}
@@ -26,16 +27,19 @@ class Create extends BaseHelper
     /**
      * {@inheritdoc}
      */
-    protected function getInstance(InputInterface $input)
-    {
-        return $this->adapter->create();
-    }
+    protected $injectFieldOptions = true;
 
     /**
      * {@inheritdoc}
      */
-    protected function getDisplayPattern()
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
-        return 'Created the %s: <info>%s</info>';
+        $instance = $this->adapter->newInstance(array());
+
+        $this->validateInstance($instance);
+        $this->helper->injectNewValues($input, $instance);
+        $this->adapter->create($instance);
+
+        $this->showMessage($output, $instance, 'The %s <info>%s</info> was created with successfully');
     }
 }

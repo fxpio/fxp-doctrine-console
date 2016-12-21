@@ -11,13 +11,143 @@
 
 namespace Sonatra\Component\DoctrineConsole\Adapter;
 
+use Sonatra\Component\DoctrineConsole\Exception\ValidationException;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
+
 /**
  * Command Adapter for service manager.
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class ServiceManagerAdapter extends BaseServiceManagerAdapter
+class ServiceManagerAdapter extends AbstractAdapter
 {
+    /**
+     * @var object
+     */
+    protected $manager;
+
+    /**
+     * @var string
+     */
+    protected $classname;
+
+    /**
+     * @var string
+     */
+    protected $shortName;
+
+    /**
+     * @var string|null
+     */
+    protected $newInstanceMethod;
+
+    /**
+     * @var string|null
+     */
+    protected $createMethod;
+
+    /**
+     * @var string|null
+     */
+    protected $getMethod;
+
+    /**
+     * @var string|null
+     */
+    protected $updateMethod;
+
+    /**
+     * @var string|null
+     */
+    protected $deleteMethod;
+
+    /**
+     * @var string|null
+     */
+    protected $undeleteMethod;
+
+    /**
+     * @var ValidatorInterface|null
+     */
+    protected $validator;
+
+    /**
+     * Constructor.
+     *
+     * @param object             $manager   The manager
+     * @param ValidatorInterface $validator The validator
+     */
+    public function __construct($manager, ValidatorInterface $validator = null)
+    {
+        $this->manager = $manager;
+        $this->validator = $validator;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function newInstance(array $options = array())
+    {
+        $this->validate('newInstance');
+
+        return $this->manager->{$this->newInstanceMethod}();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function create($instance)
+    {
+        $this->validate('create');
+        $this->validateObject($instance);
+        $this->manager->{$this->createMethod}($instance);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($identifier)
+    {
+        $this->validate('get');
+
+        $instance = $this->manager->{$this->getMethod}(array($this->getIdentifierField() => $identifier));
+
+        if (null === $instance) {
+            throw new \InvalidArgumentException(sprintf('The %s with the identifier "%s" does not exist', $this->getShortName(), $identifier));
+        }
+
+        return $instance;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function update($instance)
+    {
+        $this->validate('update');
+        $this->validateObject($instance);
+        $this->manager->{$this->updateMethod}($instance);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function delete($instance)
+    {
+        $this->validate('delete');
+        $this->manager->{$this->deleteMethod}($instance);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function undelete($identifier)
+    {
+        $this->validate('undelete');
+
+        return $this->manager->{$this->undeleteMethod}($identifier);
+    }
+
     /**
      * Set the class name of object.
      *
@@ -26,6 +156,14 @@ class ServiceManagerAdapter extends BaseServiceManagerAdapter
     public function setClass($classname)
     {
         $this->classname = $classname;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getClass()
+    {
+        return $this->classname;
     }
 
     /**
@@ -39,69 +177,27 @@ class ServiceManagerAdapter extends BaseServiceManagerAdapter
     }
 
     /**
-     * Set the prefix of command name.
-     *
-     * @param string $commandPrefix The prefix command name
+     * {@inheritdoc}
      */
-    public function setCommandPrefix($commandPrefix)
+    public function getShortName()
     {
-        $this->commandPrefix = $commandPrefix;
+        return $this->shortName;
     }
 
     /**
-     * Set the command description.
+     * Set the method name of service manager to create the instance without saving it.
      *
-     * @param string $commandDescription The command description
+     * @param string $newInstanceMethod The method name to create the instance without saving
      */
-    public function setCommandDescription($commandDescription)
+    public function setNewInstanceMethod($newInstanceMethod)
     {
-        $this->commandDescription = str_replace('{s}', '%s', $commandDescription);
+        $this->newInstanceMethod = $newInstanceMethod;
     }
 
     /**
-     * Set the identifier field of object.
+     * Set the method name of service manager to create the instance.
      *
-     * @param string $identifierField The identifier field of object
-     */
-    public function setIdentifierField($identifierField)
-    {
-        $this->identifierField = $identifierField;
-    }
-
-    /**
-     * Set the command argument name of identifier.
-     *
-     * @param string $identifierArgument The command argument name of identifier
-     */
-    public function setIdentifierArgument($identifierArgument)
-    {
-        $this->identifierArgument = $identifierArgument;
-    }
-
-    /**
-     * Set the command argument description of identifier.
-     *
-     * @param string $identifierArgumentDescription The description of the identifier argument
-     */
-    public function setIdentifierArgumentDescription($identifierArgumentDescription)
-    {
-        $this->identifierArgumentDescription = str_replace('{s}', '%s', $identifierArgumentDescription);
-    }
-
-    /**
-     * Set the method name for display the object in console.
-     *
-     * @param string $displayNameMethod The method name for display the object in console
-     */
-    public function setDisplayNameMethod($displayNameMethod)
-    {
-        $this->displayNameMethod = $displayNameMethod;
-    }
-
-    /**
-     * Set the method name of service manager for create the instance.
-     *
-     * @param string $createMethod The method name for create the instance
+     * @param string $createMethod The method name to create the instance
      */
     public function setCreateMethod($createMethod)
     {
@@ -109,9 +205,9 @@ class ServiceManagerAdapter extends BaseServiceManagerAdapter
     }
 
     /**
-     * Set the method name of service manager for get the instance.
+     * Set the method name of service manager to get the instance.
      *
-     * @param string $getMethod The method name for get the instance
+     * @param string $getMethod The method name to get the instance
      */
     public function setGetMethod($getMethod)
     {
@@ -119,9 +215,9 @@ class ServiceManagerAdapter extends BaseServiceManagerAdapter
     }
 
     /**
-     * Set the method name of service manager for update the instance.
+     * Set the method name of service manager to update the instance.
      *
-     * @param string $updateMethod The method name for update the instance
+     * @param string $updateMethod The method name to update the instance
      */
     public function setUpdateMethod($updateMethod)
     {
@@ -129,9 +225,9 @@ class ServiceManagerAdapter extends BaseServiceManagerAdapter
     }
 
     /**
-     * Set the method name of service manager for delete the instance.
+     * Set the method name of service manager to delete the instance.
      *
-     * @param string $deleteMethod The method name for delete the instance
+     * @param string $deleteMethod The method name to delete the instance
      */
     public function setDeleteMethod($deleteMethod)
     {
@@ -139,12 +235,47 @@ class ServiceManagerAdapter extends BaseServiceManagerAdapter
     }
 
     /**
-     * Set the method name of service manager for undelete the instance.
+     * Set the method name of service manager to undelete the instance.
      *
-     * @param string $undeleteMethod The method name for undelete the instance
+     * @param string $undeleteMethod The method name to undelete the instance
      */
     public function setUndeleteMethod($undeleteMethod)
     {
         $this->undeleteMethod = $undeleteMethod;
+    }
+
+    /**
+     * Validate the adapter method.
+     *
+     * @param string $method The method name
+     *
+     * @throws \RuntimeException When the method does not supported
+     */
+    private function validate($method)
+    {
+        $actionMethod = $method.'Method';
+        $ref = new \ReflectionClass($this->manager);
+
+        if (null === $this->$actionMethod || !$ref->hasMethod($this->$actionMethod)) {
+            throw new \RuntimeException(sprintf('The "%s" method for "%s" adapter is does not supported', $method, $this->getClass()));
+        }
+    }
+
+    /**
+     * Validate the object instance.
+     *
+     * @param object $instance The object instance
+     *
+     * @throws ValidationException When an error exist
+     */
+    public function validateObject($instance)
+    {
+        if (null !== $this->validator) {
+            $violations = $this->validator->validate($instance);
+
+            if (!empty($violations)) {
+                throw new ValidationException($violations);
+            }
+        }
     }
 }
