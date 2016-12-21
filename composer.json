@@ -17,7 +17,9 @@
         "doctrine/common": "~2.6"
     },
     "require-dev": {
-        "symfony/validator": "~3.0"
+        "symfony/validator": "~3.0",
+        "sonatra/default-value": "~1.0@dev",
+        "sonatra/resource": "~1.0@dev"
     },
     "autoload": {
         "psr-4": { "Sonatra\\Component\\DoctrineConsole\\": "" },
