@@ -11,8 +11,8 @@
 
 namespace Sonatra\Component\DoctrineConsole\Helper;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sonatra\Component\DoctrineConsole\Util\ObjectFieldUtil;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
