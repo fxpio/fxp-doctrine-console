@@ -13,6 +13,7 @@ namespace Sonatra\Component\DoctrineConsole\Helper;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Util\ClassUtils;
 use Sonatra\Component\DoctrineConsole\Util\ObjectFieldUtil;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
@@ -55,7 +56,7 @@ class ObjectFieldHelper
     public function getConfigs($className)
     {
         if (is_object($className)) {
-            $className = get_class($className);
+            $className = ClassUtils::getClass($className);
         }
 
         if (!array_key_exists($className, $this->configs)) {
