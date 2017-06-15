@@ -11,6 +11,7 @@
 
 namespace Sonatra\Component\DoctrineConsole\Tests\Adapter;
 
+use PHPUnit\Framework\TestCase;
 use Sonatra\Component\DoctrineConsole\Adapter\ServiceManagerAdapter;
 use Sonatra\Component\DoctrineConsole\Tests\Adapter\Fixtures\MockManager;
 use Symfony\Component\Validator\ConstraintViolation;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
+class ServiceManagerAdapterTest extends TestCase
 {
     /**
      * @var MockManager
@@ -141,7 +142,9 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
     public function testCreate()
     {
         $this->adapter->setCreateMethod('createMock');
-        $this->adapter->create(new \stdClass());
+        $obj = new \stdClass();
+        $this->adapter->create($obj);
+        $this->assertNotNull($obj);
     }
 
     /**
@@ -179,7 +182,9 @@ class ServiceManagerAdapterTest extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         $this->adapter->setUpdateMethod('updateMock');
-        $this->adapter->update(new \stdClass());
+        $obj = new \stdClass();
+        $this->adapter->update($obj);
+        $this->assertNotNull($obj);
     }
 
     /**

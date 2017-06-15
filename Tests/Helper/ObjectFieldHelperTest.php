@@ -14,6 +14,7 @@ namespace Sonatra\Component\DoctrineConsole\Tests\Helper;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use PHPUnit\Framework\TestCase;
 use Sonatra\Component\DoctrineConsole\Helper\ObjectFieldHelper;
 use Sonatra\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -26,7 +27,7 @@ use Symfony\Component\Console\Input\InputOption;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class ObjectFieldHelperTest extends \PHPUnit_Framework_TestCase
+class ObjectFieldHelperTest extends TestCase
 {
     /**
      * @var ObjectManager|\PHPUnit_Framework_MockObject_MockObject

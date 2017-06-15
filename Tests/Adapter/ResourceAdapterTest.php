@@ -12,6 +12,7 @@
 namespace Sonatra\Component\DoctrineConsole\Tests\Adapter;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use PHPUnit\Framework\TestCase;
 use Sonatra\Component\DoctrineConsole\Adapter\ResourceAdapter;
 use Sonatra\Component\Resource\Domain\DomainInterface;
 use Sonatra\Component\Resource\ResourceInterface;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class ResourceAdapterTest extends \PHPUnit_Framework_TestCase
+class ResourceAdapterTest extends TestCase
 {
     /**
      * @var DomainInterface|\PHPUnit_Framework_MockObject_MockObject

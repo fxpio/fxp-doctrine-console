@@ -11,6 +11,7 @@
 
 namespace Sonatra\Component\DoctrineConsole\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Sonatra\Component\DoctrineConsole\Exception\RecordNotFoundException;
 
 /**
@@ -18,7 +19,7 @@ use Sonatra\Component\DoctrineConsole\Exception\RecordNotFoundException;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class RecordNotFoundExceptionTest extends \PHPUnit_Framework_TestCase
+class RecordNotFoundExceptionTest extends TestCase
 {
     public function testRecordNotFoundException()
     {

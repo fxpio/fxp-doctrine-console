@@ -11,6 +11,7 @@
 
 namespace Sonatra\Component\DoctrineConsole\Tests\Helper;
 
+use PHPUnit\Framework\TestCase;
 use Sonatra\Component\DoctrineConsole\Helper\DetailObjectHelper;
 use Sonatra\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use Symfony\Component\Console\Output\StreamOutput;
@@ -20,7 +21,7 @@ use Symfony\Component\Console\Output\StreamOutput;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class DetailObjectHelperTest extends \PHPUnit_Framework_TestCase
+class DetailObjectHelperTest extends TestCase
 {
     /**
      * @var StreamOutput|null

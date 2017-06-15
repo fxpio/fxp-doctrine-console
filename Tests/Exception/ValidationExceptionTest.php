@@ -11,6 +11,7 @@
 
 namespace Sonatra\Component\DoctrineConsole\Tests\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Sonatra\Component\DoctrineConsole\Exception\ValidationException;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\ConstraintViolationList;
  *
  * @author François Pluchino <francois.pluchino@sonatra.com>
  */
-class ValidationExceptionTest extends \PHPUnit_Framework_TestCase
+class ValidationExceptionTest extends TestCase
 {
     public function testViolationExceptionWithEmptyViolation()
     {
