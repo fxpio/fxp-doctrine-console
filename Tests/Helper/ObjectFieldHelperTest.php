@@ -1,22 +1,22 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\DoctrineConsole\Tests\Helper;
+namespace Fxp\Component\DoctrineConsole\Tests\Helper;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
+use Fxp\Component\DoctrineConsole\Helper\ObjectFieldHelper;
+use Fxp\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use PHPUnit\Framework\TestCase;
-use Sonatra\Component\DoctrineConsole\Helper\ObjectFieldHelper;
-use Sonatra\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
@@ -25,7 +25,7 @@ use Symfony\Component\Console\Input\InputOption;
 /**
  * Object Field Helper Tests.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class ObjectFieldHelperTest extends TestCase
 {

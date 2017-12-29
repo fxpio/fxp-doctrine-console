@@ -1,19 +1,19 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\DoctrineConsole\Tests\Adapter;
+namespace Fxp\Component\DoctrineConsole\Tests\Adapter;
 
+use Fxp\Component\DoctrineConsole\Adapter\ServiceManagerAdapter;
+use Fxp\Component\DoctrineConsole\Tests\Adapter\Fixtures\MockManager;
 use PHPUnit\Framework\TestCase;
-use Sonatra\Component\DoctrineConsole\Adapter\ServiceManagerAdapter;
-use Sonatra\Component\DoctrineConsole\Tests\Adapter\Fixtures\MockManager;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 /**
  * Service Manager Adapter Tests.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class ServiceManagerAdapterTest extends TestCase
 {
@@ -148,7 +148,7 @@ class ServiceManagerAdapterTest extends TestCase
     }
 
     /**
-     * @expectedException \Sonatra\Component\DoctrineConsole\Exception\ValidationException
+     * @expectedException \Fxp\Component\DoctrineConsole\Exception\ValidationException
      */
     public function testCreateWithError()
     {
@@ -188,7 +188,7 @@ class ServiceManagerAdapterTest extends TestCase
     }
 
     /**
-     * @expectedException \Sonatra\Component\DoctrineConsole\Exception\ValidationException
+     * @expectedException \Fxp\Component\DoctrineConsole\Exception\ValidationException
      */
     public function testUpdateWithError()
     {

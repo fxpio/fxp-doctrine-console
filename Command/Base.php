@@ -1,25 +1,25 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\DoctrineConsole\Command;
+namespace Fxp\Component\DoctrineConsole\Command;
 
-use Sonatra\Component\DoctrineConsole\Adapter\AdapterInterface;
-use Sonatra\Component\DoctrineConsole\Exception\RecordNotFoundException;
-use Sonatra\Component\DoctrineConsole\Helper\ObjectFieldHelper;
+use Fxp\Component\DoctrineConsole\Adapter\AdapterInterface;
+use Fxp\Component\DoctrineConsole\Exception\RecordNotFoundException;
+use Fxp\Component\DoctrineConsole\Helper\ObjectFieldHelper;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 abstract class Base extends Command
 {

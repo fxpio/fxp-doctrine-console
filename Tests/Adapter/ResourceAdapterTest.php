@@ -1,27 +1,27 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\DoctrineConsole\Tests\Adapter;
+namespace Fxp\Component\DoctrineConsole\Tests\Adapter;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Fxp\Component\DoctrineConsole\Adapter\ResourceAdapter;
+use Fxp\Component\Resource\Domain\DomainInterface;
+use Fxp\Component\Resource\ResourceInterface;
 use PHPUnit\Framework\TestCase;
-use Sonatra\Component\DoctrineConsole\Adapter\ResourceAdapter;
-use Sonatra\Component\Resource\Domain\DomainInterface;
-use Sonatra\Component\Resource\ResourceInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * Resource Adapter Tests.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class ResourceAdapterTest extends TestCase
 {
@@ -93,7 +93,7 @@ class ResourceAdapterTest extends TestCase
      *
      * @param string $action The action
      *
-     * @expectedException \Sonatra\Component\DoctrineConsole\Exception\ValidationException
+     * @expectedException \Fxp\Component\DoctrineConsole\Exception\ValidationException
      */
     public function testCreateWithViolations($action)
     {

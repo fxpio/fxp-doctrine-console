@@ -1,14 +1,14 @@
 {
-    "name": "sonatra/doctrine-console",
+    "name": "fxp/doctrine-console",
     "type": "library",
     "description": "Helper for display and manage the doctrine object in console",
     "keywords": ["doctrine", "console", "helper", "object", "entity", "command", "manipulation"],
-    "homepage": "https://github.com/sonatra/sonatra-doctrine-console",
+    "homepage": "https://github.com/fxpio/fxp-doctrine-console",
     "license": "MIT",
     "authors": [
         {
             "name": "François Pluchino",
-            "email": "francois.pluchino@sonatra.com"
+            "email": "francois.pluchino@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -20,11 +20,11 @@
     },
     "require-dev": {
         "symfony/validator": "^3.4.0|^4.0.0",
-        "sonatra/default-value": "^1.0.0",
-        "sonatra/resource": "^1.0.0"
+        "fxp/default-value": "^1.0.0",
+        "fxp/resource": "^1.0.0"
     },
     "autoload": {
-        "psr-4": { "Sonatra\\Component\\DoctrineConsole\\": "" },
+        "psr-4": { "Fxp\\Component\\DoctrineConsole\\": "" },
         "exclude-from-classmap": [
             "/Tests/"
         ]

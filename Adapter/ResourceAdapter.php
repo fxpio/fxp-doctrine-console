@@ -1,24 +1,24 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\DoctrineConsole\Adapter;
+namespace Fxp\Component\DoctrineConsole\Adapter;
 
-use Sonatra\Component\DoctrineConsole\Exception\ValidationException;
-use Sonatra\Component\Resource\Domain\DomainInterface;
-use Sonatra\Component\Resource\ResourceInterface;
+use Fxp\Component\DoctrineConsole\Exception\ValidationException;
+use Fxp\Component\Resource\Domain\DomainInterface;
+use Fxp\Component\Resource\ResourceInterface;
 
 /**
  * Command Adapter for resource domain.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class ResourceAdapter extends AbstractAdapter
 {

@@ -1,23 +1,23 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\DoctrineConsole\Adapter;
+namespace Fxp\Component\DoctrineConsole\Adapter;
 
-use Sonatra\Component\DoctrineConsole\Exception\ValidationException;
+use Fxp\Component\DoctrineConsole\Exception\ValidationException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Command Adapter for service manager.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class ServiceManagerAdapter extends AbstractAdapter
 {

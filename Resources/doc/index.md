@@ -5,20 +5,10 @@ Getting Started
 
 ### Download the library using composer
 
-Add Sonatra DoctrineConsole in your composer.json:
-
-```js
-{
-    "require": {
-        "sonatra/doctrine-console": "~1.0"
-    }
-}
-```
-
-Or tell composer to download the library by running the command:
+Tell composer to download the library by running the command:
 
 ```bash
-$ php composer.phar require sonatra/doctrine-console:"~1.0"
+$ composer require fxp/doctrine-console
 ```
 
-Composer will install the library to your project's `vendor/sonatra` directory.
+Composer will install the library to your project's `vendor/fxp` directory.

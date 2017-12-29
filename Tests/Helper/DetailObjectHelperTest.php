@@ -1,25 +1,25 @@
 <?php
 
 /*
- * This file is part of the Sonatra package.
+ * This file is part of the Fxp package.
  *
- * (c) François Pluchino <francois.pluchino@sonatra.com>
+ * (c) François Pluchino <francois.pluchino@gmail.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-namespace Sonatra\Component\DoctrineConsole\Tests\Helper;
+namespace Fxp\Component\DoctrineConsole\Tests\Helper;
 
+use Fxp\Component\DoctrineConsole\Helper\DetailObjectHelper;
+use Fxp\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use PHPUnit\Framework\TestCase;
-use Sonatra\Component\DoctrineConsole\Helper\DetailObjectHelper;
-use Sonatra\Component\DoctrineConsole\Tests\Helper\Fixtures\InstanceMock;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**
  * Detail Object Helper Tests.
  *
- * @author François Pluchino <francois.pluchino@sonatra.com>
+ * @author François Pluchino <francois.pluchino@gmail.com>
  */
 class DetailObjectHelperTest extends TestCase
 {
