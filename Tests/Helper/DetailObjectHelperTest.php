@@ -33,10 +33,10 @@ class DetailObjectHelperTest extends TestCase
      */
     public function getHumanizeInputs()
     {
-        return array(
-            array('fooBar', 'Foo bar'),
-            array('FooBar', 'Foo bar'),
-        );
+        return [
+            ['fooBar', 'Foo bar'],
+            ['FooBar', 'Foo bar'],
+        ];
     }
 
     /**
@@ -57,7 +57,7 @@ class DetailObjectHelperTest extends TestCase
 
         DetailObjectHelper::display($this->output, $instance);
         $validDate = $instance->getValidationDate()->format(\DateTime::ISO8601);
-        $valid = array(
+        $valid = [
             ' Name             : Foo bar                  ',
             ' Has children     : False                    ',
             ' Is valid         : True                     ',
@@ -71,7 +71,7 @@ class DetailObjectHelperTest extends TestCase
             '                    '.$validDate.' ',
             ' Owner            : format error             ',
             '',
-        );
+        ];
         $this->assertSame(implode(PHP_EOL, $valid), $this->getDisplay());
     }
 

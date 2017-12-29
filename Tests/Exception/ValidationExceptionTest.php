@@ -25,7 +25,7 @@ class ValidationExceptionTest extends TestCase
 {
     public function testViolationExceptionWithEmptyViolation()
     {
-        $e = new ValidationException(new ConstraintViolationList(array()));
+        $e = new ValidationException(new ConstraintViolationList([]));
 
         $this->assertSame('', $e->getMessage());
     }
@@ -36,11 +36,11 @@ class ValidationExceptionTest extends TestCase
         $object->foo = 'bar';
         $object->bar = 'foo';
 
-        $e = new ValidationException(new ConstraintViolationList(array(
-            new ConstraintViolation('Message 1', 'Message 1', array(), $object, null, null),
-            new ConstraintViolation('Message 2', 'Message 2', array(), $object, 'foo', null),
-            new ConstraintViolation('Message 3', 'Message 3', array(), $object, 'bar', null),
-        )));
+        $e = new ValidationException(new ConstraintViolationList([
+            new ConstraintViolation('Message 1', 'Message 1', [], $object, null, null),
+            new ConstraintViolation('Message 2', 'Message 2', [], $object, 'foo', null),
+            new ConstraintViolation('Message 3', 'Message 3', [], $object, 'bar', null),
+        ]));
 
         $expected = <<<'EOT'
 
@@ -55,6 +55,6 @@ class ValidationExceptionTest extends TestCase
       - Message 3
 EOT;
 
-        $this->assertSame(str_replace(array("\r", "\n"), PHP_EOL, $expected), $e->getMessage());
+        $this->assertSame(str_replace(["\r", "\n"], PHP_EOL, $expected), $e->getMessage());
     }
 }

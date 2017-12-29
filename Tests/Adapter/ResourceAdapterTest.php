@@ -49,7 +49,7 @@ class ResourceAdapterTest extends TestCase
 
     public function testNewInstance()
     {
-        $options = array();
+        $options = [];
         $object = new \stdClass();
 
         $this->domain->expects($this->once())
@@ -63,12 +63,12 @@ class ResourceAdapterTest extends TestCase
 
     public function getActions()
     {
-        return array(
-            array('create'),
-            array('update'),
-            array('delete'),
-            array('undelete'),
-        );
+        return [
+            ['create'],
+            ['update'],
+            ['delete'],
+            ['undelete'],
+        ];
     }
 
     /**
@@ -119,9 +119,9 @@ class ResourceAdapterTest extends TestCase
 
         $repo->expects($this->once())
             ->method('findOneBy')
-            ->with(array(
+            ->with([
                 'id' => $object->id,
-            ))
+            ])
             ->willReturn($object);
 
         $this->adapter->setIdentifierField('id');

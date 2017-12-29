@@ -33,11 +33,11 @@ class View extends Base
         $id = $input->getArgument($this->adapter->getIdentifierArgument());
         $instance = $this->adapter->get($id);
 
-        $output->writeln(array(
+        $output->writeln([
             '',
             '<info>Details of '.$this->adapter->getShortName().':</info>',
             '',
-        ));
+        ]);
 
         DetailObjectHelper::display($output, $instance);
         $output->writeln('');

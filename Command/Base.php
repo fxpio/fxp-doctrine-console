@@ -61,7 +61,7 @@ abstract class Base extends Command
      * @param array             $configArguments The config of custom command arguments
      * @param array             $configOptions   The config of custom command options
      */
-    public function __construct(ObjectFieldHelper $helper, AdapterInterface $adapter, array $configArguments = array(), array $configOptions = array())
+    public function __construct(ObjectFieldHelper $helper, AdapterInterface $adapter, array $configArguments = [], array $configOptions = [])
     {
         $this->helper = $helper;
         $this->adapter = $adapter;
@@ -124,9 +124,9 @@ abstract class Base extends Command
     {
         $methodGet = $this->adapter->getDisplayNameMethod();
 
-        $output->writeln(array(
+        $output->writeln([
             '',
             sprintf($message, strtolower($this->adapter->getShortName()), $instance->$methodGet()),
-        ));
+        ]);
     }
 }

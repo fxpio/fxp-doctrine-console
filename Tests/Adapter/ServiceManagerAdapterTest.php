@@ -136,7 +136,7 @@ class ServiceManagerAdapterTest extends TestCase
     public function testNewInstance()
     {
         $this->adapter->setNewInstanceMethod('newInstanceMock');
-        $this->assertEquals(new \stdClass(), $this->adapter->newInstance(array()));
+        $this->assertEquals(new \stdClass(), $this->adapter->newInstance([]));
     }
 
     public function testCreate()
@@ -223,9 +223,9 @@ class ServiceManagerAdapterTest extends TestCase
      */
     private function addTestViolation($object)
     {
-        $violations = new ConstraintViolationList(array(
-            new ConstraintViolation('Message 1', 'Message 1', array(), $object, null, null),
-        ));
+        $violations = new ConstraintViolationList([
+            new ConstraintViolation('Message 1', 'Message 1', [], $object, null, null),
+        ]);
 
         $this->validator->expects($this->once())
             ->method('validate')

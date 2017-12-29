@@ -52,10 +52,10 @@ class ObjectFieldHelperTest extends TestCase
         $this->meta = $this->getMockBuilder('Doctrine\Common\Persistence\Mapping\ClassMetadata')->getMock();
         $this->meta->expects($this->any())
             ->method('getFieldNames')
-            ->will($this->returnValue(array('name', 'roles', 'validationDate')));
+            ->will($this->returnValue(['name', 'roles', 'validationDate']));
         $this->meta->expects($this->any())
             ->method('getAssociationNames')
-            ->will($this->returnValue(array('owner')));
+            ->will($this->returnValue(['owner']));
         $this->meta->expects($this->any())
             ->method('isIdentifier')
             ->will($this->returnValue(false));
@@ -89,16 +89,16 @@ class ObjectFieldHelperTest extends TestCase
     public function testGetConfigs()
     {
         $configs = $this->ofh->getConfigs(new \stdClass());
-        $valid = array(
-            array(
+        $valid = [
+            [
                 'name' => 'string',
                 'roles' => 'array',
                 'validationDate' => 'datetime',
-            ),
-            array(
+            ],
+            [
                 'owner' => 'stdClass',
-            ),
-        );
+            ],
+        ];
         $this->assertEquals($valid, $configs);
     }
 
@@ -114,12 +114,12 @@ class ObjectFieldHelperTest extends TestCase
         $this->assertCount(0, $def->getArguments());
         $this->assertCount(4, $def->getOptions());
 
-        $valid = array(
+        $valid = [
             'name',
             'roles',
             'validationDate',
             'owner',
-        );
+        ];
         $this->assertEquals($valid, array_keys($def->getOptions()));
     }
 
@@ -137,14 +137,14 @@ class ObjectFieldHelperTest extends TestCase
         $this->assertCount(1, $def->getArguments());
         $this->assertCount(3, $def->getOptions());
 
-        $validArguments = array(
+        $validArguments = [
             'name',
-        );
-        $validOptions = array(
+        ];
+        $validOptions = [
             'owner',
             'roles',
             'validationDate',
-        );
+        ];
         $this->assertEquals($validArguments, array_keys($def->getArguments()));
         $this->assertEquals($validOptions, array_keys($def->getOptions()));
     }
@@ -157,16 +157,16 @@ class ObjectFieldHelperTest extends TestCase
         $this->ofh->injectFieldOptions($def, $instance);
 
         $this->assertSame('Foo bar', $instance->getName());
-        $this->assertSame(array('foo', 'bar'), $instance->getRoles());
+        $this->assertSame(['foo', 'bar'], $instance->getRoles());
 
-        $input = new ArrayInput(array(
+        $input = new ArrayInput([
             'name' => 'New Name',
-            '--roles' => array('Role1', 'Role 2'),
-        ), $def);
+            '--roles' => ['Role1', 'Role 2'],
+        ], $def);
         $this->ofh->injectNewValues($input, $instance);
 
         $this->assertSame('New Name', $instance->getName());
-        $this->assertSame(array('Role1', 'Role 2'), $instance->getRoles());
+        $this->assertSame(['Role1', 'Role 2'], $instance->getRoles());
     }
 
     public function testInjectFieldNewValuesWithForceEmpty()
@@ -177,16 +177,16 @@ class ObjectFieldHelperTest extends TestCase
         $this->ofh->injectFieldOptions($def, $instance);
 
         $this->assertSame('Foo bar', $instance->getName());
-        $this->assertSame(array('foo', 'bar'), $instance->getRoles());
+        $this->assertSame(['foo', 'bar'], $instance->getRoles());
 
-        $input = new ArrayInput(array(
+        $input = new ArrayInput([
             'name' => '{{null}}',
             '--roles' => '{{empty}}',
-        ), $def);
+        ], $def);
         $this->ofh->injectNewValues($input, $instance);
 
         $this->assertNull($instance->getName());
-        $this->assertSame(array(), $instance->getRoles());
+        $this->assertSame([], $instance->getRoles());
     }
 
     /**
@@ -202,9 +202,9 @@ class ObjectFieldHelperTest extends TestCase
         $this->assertInstanceOf('\DateTime', $instance->getValidationDate());
 
         $date = new \DateTime();
-        $input = new ArrayInput(array(
+        $input = new ArrayInput([
             '--validationDate' => $date->format(\DateTime::ISO8601),
-        ), $def);
+        ], $def);
         $this->ofh->injectNewValues($input, $instance);
     }
 
@@ -221,7 +221,7 @@ class ObjectFieldHelperTest extends TestCase
 
         $targetRepo->expects($this->any())
             ->method('findBy')
-            ->will($this->returnValue(array($validOwner)));
+            ->will($this->returnValue([$validOwner]));
 
         $instance = new InstanceMock();
         $def = new InputDefinition();
@@ -230,9 +230,9 @@ class ObjectFieldHelperTest extends TestCase
         $this->assertInstanceOf('\stdClass', $instance->getOwner());
         $this->assertNotSame($validOwner, $instance->getOwner());
 
-        $input = new ArrayInput(array(
+        $input = new ArrayInput([
             '--owner' => 1,
-        ), $def);
+        ], $def);
         $this->ofh->injectNewValues($input, $instance);
 
         $this->assertSame($validOwner, $instance->getOwner());
@@ -255,9 +255,9 @@ class ObjectFieldHelperTest extends TestCase
         $def = new InputDefinition();
         $this->ofh->injectFieldOptions($def, $instance);
 
-        $input = new ArrayInput(array(
+        $input = new ArrayInput([
             '--owner' => 1,
-        ), $def);
+        ], $def);
         $this->ofh->injectNewValues($input, $instance);
     }
 
@@ -268,9 +268,9 @@ class ObjectFieldHelperTest extends TestCase
         $def = new InputDefinition();
         $def->addOption(new InputOption('test'));
 
-        $input = new ArrayInput(array(
+        $input = new ArrayInput([
             '--test' => 'New Name',
-        ), $def);
+        ], $def);
         $this->ofh->injectNewValues($input, $instance);
 
         $this->assertEquals($valid, $instance);

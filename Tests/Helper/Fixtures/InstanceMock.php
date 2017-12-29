@@ -35,9 +35,9 @@ class InstanceMock
         $this->valid = true;
         $this->validationDate = new \DateTime();
         $this->numberOfTests = 42;
-        $this->roles = array('foo', 'bar');
-        $this->listOfInteger = array(1, 2);
-        $this->listOfDatetime = array(clone $this->validationDate, clone $this->validationDate);
+        $this->roles = ['foo', 'bar'];
+        $this->listOfInteger = [1, 2];
+        $this->listOfDatetime = [clone $this->validationDate, clone $this->validationDate];
         $this->owner = new \stdClass();
     }
 

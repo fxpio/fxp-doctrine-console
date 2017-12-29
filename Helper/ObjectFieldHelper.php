@@ -43,7 +43,7 @@ class ObjectFieldHelper
     public function __construct(ObjectManager $objectManager)
     {
         $this->om = $objectManager;
-        $this->configs = array();
+        $this->configs = [];
     }
 
     /**
@@ -60,7 +60,7 @@ class ObjectFieldHelper
         }
 
         if (!array_key_exists($className, $this->configs)) {
-            $this->configs[$className] = array(array(), array());
+            $this->configs[$className] = [[], []];
             $meta = $this->om->getClassMetadata($className);
             $this->addConfigFields($meta, $className);
             $this->addConfigAssociations($meta, $className);
@@ -124,7 +124,7 @@ class ObjectFieldHelper
     private function setAssociationValue($instance, $fieldName, $value, $target, $id)
     {
         $targetRepo = $this->om->getRepository($target);
-        $target = $targetRepo->findBy(array($id => $value));
+        $target = $targetRepo->findBy([$id => $value]);
 
         if (null === $target) {
             throw new \InvalidArgumentException(sprintf('The specified mapped field "%s" couldn\'t be found with the Id "%s".', $fieldName, $value));

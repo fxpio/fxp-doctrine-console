@@ -34,7 +34,7 @@ class Create extends Base
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $instance = $this->adapter->newInstance(array());
+        $instance = $this->adapter->newInstance([]);
 
         $this->validateInstance($instance);
         $this->helper->injectNewValues($input, $instance);

@@ -40,7 +40,7 @@ class ResourceAdapter extends AbstractAdapter
     /**
      * {@inheritdoc}
      */
-    public function newInstance(array $options = array())
+    public function newInstance(array $options = [])
     {
         return $this->domain->newInstance($options);
     }
@@ -59,7 +59,7 @@ class ResourceAdapter extends AbstractAdapter
      */
     public function get($identifier)
     {
-        return $this->domain->getRepository()->findOneBy(array($this->getIdentifierField() => $identifier));
+        return $this->domain->getRepository()->findOneBy([$this->getIdentifierField() => $identifier]);
     }
 
     /**

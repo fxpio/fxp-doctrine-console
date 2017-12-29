@@ -59,7 +59,7 @@ abstract class DetailObjectHelper
             if (preg_match('/^get|has|is/', $methodName) && 0 === $method->getNumberOfParameters()) {
                 $value = static::getFieldValue($instance, $methodName);
                 $methodName = preg_match('/^get/', $methodName) ? substr($methodName, 3) : $methodName;
-                $table->addRow(array('<comment>'.static::humanize($methodName).'</comment>', ': '.$value));
+                $table->addRow(['<comment>'.static::humanize($methodName).'</comment>', ': '.$value]);
             }
         }
 
@@ -100,7 +100,7 @@ abstract class DetailObjectHelper
             $value = $value ? 'True' : 'False';
         } elseif (is_array($value) || $value instanceof \IteratorAggregate) {
             $itValue = $value instanceof \IteratorAggregate ? $value->getIterator() : $value;
-            $value = array();
+            $value = [];
             foreach ($itValue as $key => $arrayValue) {
                 $value[$key] = static::formatValue($arrayValue);
             }

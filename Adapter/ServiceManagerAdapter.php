@@ -86,7 +86,7 @@ class ServiceManagerAdapter extends AbstractAdapter
     /**
      * {@inheritdoc}
      */
-    public function newInstance(array $options = array())
+    public function newInstance(array $options = [])
     {
         $this->validate('newInstance');
 
@@ -110,7 +110,7 @@ class ServiceManagerAdapter extends AbstractAdapter
     {
         $this->validate('get');
 
-        $instance = $this->manager->{$this->getMethod}(array($this->getIdentifierField() => $identifier));
+        $instance = $this->manager->{$this->getMethod}([$this->getIdentifierField() => $identifier]);
 
         if (null === $instance) {
             throw new \InvalidArgumentException(sprintf('The %s with the identifier "%s" does not exist', $this->getShortName(), $identifier));

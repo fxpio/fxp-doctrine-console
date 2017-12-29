@@ -44,8 +44,8 @@ class ValidationException extends BaseValidatorException implements ExceptionInt
     private function buildMessage(ConstraintViolationListInterface $violations)
     {
         $msg = '';
-        $errors = array();
-        $childrenErrors = array();
+        $errors = [];
+        $childrenErrors = [];
 
         /* @var ConstraintViolationInterface $violation */
         foreach ($violations as $violation) {

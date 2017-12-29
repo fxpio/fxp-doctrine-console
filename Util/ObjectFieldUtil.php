@@ -75,7 +75,7 @@ abstract class ObjectFieldUtil
         if ('{{null}}' === $value) {
             $value = null;
         } elseif ('{{empty}}' === $value) {
-            $value = array();
+            $value = [];
         }
 
         return $value;

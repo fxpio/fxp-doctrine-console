@@ -27,7 +27,7 @@ interface AdapterInterface
      *
      * @throws \RuntimeException When the create method is not accessible
      */
-    public function newInstance(array $options = array());
+    public function newInstance(array $options = []);
 
     /**
      * Create the object instance.
