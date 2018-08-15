@@ -13,8 +13,8 @@ namespace Fxp\Component\DoctrineConsole\Helper;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Util\ClassUtils;
 use Fxp\Component\DoctrineConsole\Util\ObjectFieldUtil;
+use Fxp\Component\DoctrineExtra\Util\ClassUtils;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 
