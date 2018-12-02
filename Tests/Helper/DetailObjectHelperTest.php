@@ -53,7 +53,7 @@ class DetailObjectHelperTest extends TestCase
     public function testDisplay()
     {
         $instance = new InstanceMock();
-        $this->output = new StreamOutput(fopen('php://memory', 'w', false), StreamOutput::VERBOSITY_NORMAL, false);
+        $this->output = new StreamOutput(fopen('php://memory', 'wb', false), StreamOutput::VERBOSITY_NORMAL, false);
 
         DetailObjectHelper::display($this->output, $instance);
         $validDate = $instance->getValidationDate()->format(\DateTime::ISO8601);
