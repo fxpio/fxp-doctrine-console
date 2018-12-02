@@ -108,7 +108,7 @@ abstract class Base extends Command
      */
     protected function validateInstance($instance)
     {
-        if (!is_object($instance)) {
+        if (!\is_object($instance)) {
             throw new RecordNotFoundException();
         }
     }

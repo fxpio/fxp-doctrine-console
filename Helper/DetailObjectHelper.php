@@ -96,9 +96,9 @@ abstract class DetailObjectHelper
     {
         if ($value instanceof \DateTime) {
             $value = $value->format(\DateTime::ISO8601);
-        } elseif (is_bool($value)) {
+        } elseif (\is_bool($value)) {
             $value = $value ? 'True' : 'False';
-        } elseif (is_array($value) || $value instanceof \IteratorAggregate) {
+        } elseif (\is_array($value) || $value instanceof \IteratorAggregate) {
             $itValue = $value instanceof \IteratorAggregate ? $value->getIterator() : $value;
             $value = [];
             foreach ($itValue as $key => $arrayValue) {

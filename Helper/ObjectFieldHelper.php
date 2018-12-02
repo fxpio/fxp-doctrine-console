@@ -55,7 +55,7 @@ class ObjectFieldHelper
      */
     public function getConfigs($className)
     {
-        if (is_object($className)) {
+        if (\is_object($className)) {
             $className = ClassUtils::getClass($className);
         }
 
